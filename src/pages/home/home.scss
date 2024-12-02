@@ -1,0 +1,22 @@
+.container {
+    margin: 0 auto;
+    padding: 1rem;
+    
+    .title {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+  
+    .filter {
+      margin-bottom: 2rem;
+    }
+  
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+       gap: 1rem;
+      border: 4px solid #0ea5e9; // Sky blue
+    }
+  }
+  
