@@ -5,10 +5,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
 import ProductDetails from './pages/productDetail/ProductDetail';
 import Cart from './pages/cart/Cart';
+import Header from './components/header/Navbar';
 
 function App() {
   return (
-    <Router>
+      <Router>
+          <Header />
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetails />} />
