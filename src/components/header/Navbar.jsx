@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -11,7 +11,7 @@ import { useCart } from "../../context/CartContext";
 const Header = () => {
   const { getTotalItems } = useCart();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-
+   const navigate=useNavigate()
   // Toggle the dropdown visibility
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -57,7 +57,7 @@ const Header = () => {
           </button>
 
           {/* Shopping Cart Icon */}
-          <button className={styles["action-button"]}>
+          <button className={styles["action-button"]} onClick={()=>navigate('/cart')}>
             <ShoppingCartOutlinedIcon />
             {getTotalItems() > 0 && (
               <span className={styles["cart-badge"]}>{getTotalItems()}</span>
