@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button, TextField } from "@mui/material"; 
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo2.png";
 import "./login.scss";
 
 const Login = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleIcon from "@mui/icons-material/Google";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo2.png";
 import "./SignUp.css"; 
 import { Link } from "react-router-dom";
 
