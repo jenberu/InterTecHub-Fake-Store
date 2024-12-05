@@ -6,14 +6,17 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import styles from "./Header.module.scss";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccountDropdown from "../accounts/ManageAccounts";
+import { useCart } from "../../context/CartContext";
 
 const Header = () => {
+  const { getTotalItems } = useCart();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   // Toggle the dropdown visibility
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
   };
+
 
   return (
     <div className={styles.header}>
@@ -52,8 +55,13 @@ const Header = () => {
           <button className={styles["action-button"]}>
             <FavoriteBorderIcon />
           </button>
+
+          {/* Shopping Cart Icon */}
           <button className={styles["action-button"]}>
             <ShoppingCartOutlinedIcon />
+            {getTotalItems() > 0 && (
+              <span className={styles["cart-badge"]}>{getTotalItems()}</span>
+            )}
           </button>
 
           {/* User Profile Icon */}
@@ -61,13 +69,14 @@ const Header = () => {
             className={styles["action-button"]}
             onClick={toggleDropdown} // Toggle dropdown on click
           >
-            <AccountCircleIcon/>
+            <AccountCircleIcon />
           </button>
 
           {/* Dropdown Menu */}
-          {isDropdownVisible && <AccountDropdown  toggle={toggleDropdown } />}
+          {isDropdownVisible && <AccountDropdown toggle={toggleDropdown} />}
         </div>
       </div>
+
     </div>
   );
 };

@@ -9,8 +9,9 @@ import DevicesOtherIcon from "@mui/icons-material/DevicesOther";
 import DiamondIcon from "@mui/icons-material/Diamond"; 
 import ManIcon from "@mui/icons-material/Man"; 
 import WomanIcon from "@mui/icons-material/Woman"; 
-
+import { useCart } from "../../context/CartContext";
 const Home = () => {
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);

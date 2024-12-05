@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./ProductDetails.module.scss";
+import { useCart } from "../../context/CartContext";
 
 const ProductDetails = () => {
+  const { removeFromCart } = useCart();
   const { state } = useLocation();
   const product = state?.product;
   const navigate = useNavigate();
@@ -24,7 +26,8 @@ const ProductDetails = () => {
     // Add logic for the "Buy Now" functionality
   };
 
-  const handleRemoveFromCart = () => {
+    const handleRemoveFromCart = () => {
+      removeFromCart(product.id)
     alert("Product removed from cart");
     // Add logic to remove the product from the cart
     navigate("/");

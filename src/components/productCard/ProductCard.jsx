@@ -4,11 +4,14 @@ import styles from "./ProductCard.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarIcon from "@mui/icons-material/Star";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
+import { useCart } from "../../context/CartContext";
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
+    addToCart(product);
     navigate(`/product/${product.id}`, { state: { product } });
   };
 

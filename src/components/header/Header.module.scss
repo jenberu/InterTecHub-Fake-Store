@@ -76,8 +76,24 @@
     .actions {
       display: flex;
       gap: 10px;
-
+      .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: #ff0000;
+        color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: bold;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
       .action-button {
+        position: relative;
         background: none;
         border: 1px solid #ccc;
         padding: 8px 12px;
