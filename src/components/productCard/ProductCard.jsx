@@ -1,10 +1,17 @@
-import React from 'react';
-import styles from './ProductCard.module.scss';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./ProductCard.module.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarIcon from "@mui/icons-material/Star";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
-const ProductCard = ({ product, addToCart }) => {
+const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    navigate(`/product/${product.id}`, { state: { product } });
+  };
+
   return (
     <div className={styles.card}>
       <div className={styles.iconContainer}>
@@ -21,19 +28,14 @@ const ProductCard = ({ product, addToCart }) => {
       
       <h3 className={styles.title}>{product.title}</h3>
       <p className={styles.price}>${product.price.toFixed(2)}</p>
-       <p className={styles.rating}>
+      <p className={styles.rating}>
         {Array(product.rating)
-         .fill(null)
-         .map((_, index) => (
+          .fill(null)
+          .map((_, index) => (
             <StarIcon key={index} className={styles.starIcon} />
           ))}
       </p>
-
-      
-      <button
-        onClick={() => addToCart(product)}
-        className={styles.addToCartButton}
-      >
+      <button onClick={handleAddToCart} className={styles.addToCartButton}>
         Add to Cart
       </button>
     </div>

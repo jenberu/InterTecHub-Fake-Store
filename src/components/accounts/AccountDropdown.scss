@@ -1,0 +1,60 @@
+.account-dropdown-container {
+    position: relative;
+    display: inline-block;
+    z-index: 10;
+  }
+  
+  .account-dropdown {
+    color:white;
+    position: absolute;
+    top: 40px; 
+    right: 0;
+    background-color: rgba(31, 10, 23, 0.479);
+    border: 1px solid #ccc;
+    width: 200px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100; 
+  }
+  
+  .dropdown-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .manage-account {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .dropdown-item {
+    
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #6d3b8513;
+  }
+  
+  .icon {
+    
+    color: #007bff;
+    margin-right: 10px;
+  }
+  
+  .item-label {
+    font-size: 18px;
+  }
+  

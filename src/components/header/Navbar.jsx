@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import styles from "./Header.module.scss";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AccountDropdown from "../accounts/ManageAccounts";
 
 const Header = () => {
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+  // Toggle the dropdown visibility
+  const toggleDropdown = () => {
+    setDropdownVisible((prev) => !prev);
+  };
+
   return (
     <div className={styles.header}>
       {/* Logo and Menu Section */}
@@ -46,6 +55,17 @@ const Header = () => {
           <button className={styles["action-button"]}>
             <ShoppingCartOutlinedIcon />
           </button>
+
+          {/* User Profile Icon */}
+          <button
+            className={styles["action-button"]}
+            onClick={toggleDropdown} // Toggle dropdown on click
+          >
+            <AccountCircleIcon/>
+          </button>
+
+          {/* Dropdown Menu */}
+          {isDropdownVisible && <AccountDropdown  toggle={toggleDropdown } />}
         </div>
       </div>
     </div>

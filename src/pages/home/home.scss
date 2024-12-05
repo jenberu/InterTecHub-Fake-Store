@@ -38,6 +38,10 @@
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
+      .active{
+        background-color: brown;
+        color: white;
+      }
      
     }
       
