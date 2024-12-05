@@ -1,0 +1,122 @@
+.login-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .login-left {
+    flex: 7;
+    background-color: #cbe4e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-image-wrapper {
+    width: 805px;
+    height: 781px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .login-logo {
+    width: 805px;
+    height: 706px;
+    position: absolute;
+    top: 75px;
+    left: 0;
+  }
+  
+  .login-right {
+    flex: 5;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .login-header h1 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .login-header p {
+    font-size: 1rem;
+    opacity: 0.7;
+    margin: 5px 0 20px 0;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .login-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .login-input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .login-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .login-button {
+    padding: 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button.primary {
+    background-color: #d32f2f;
+    color: white;
+  }
+  
+  .forgot-password-link {
+    text-align: right;
+    margin-top: 10px;
+  }
+  
+  .forgot-password {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .forgot-password:hover {
+    text-decoration: underline;
+  }
+  
+  .login-footer {
+    text-align: center;
+  }
+  
+  .login-footer p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  
+  .signup-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .signup-link:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,63 +1,54 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import {
-  Box,
-  IconButton,
-  InputAdornment,
-  List,
-  ListItem,
-  TextField,
-  Typography,
-} from "@mui/material";
 import styles from "./Header.module.scss";
 
 const Header = () => {
   return (
-    <Box className={styles.header}>
-      <Box className={styles["logo-and-menu"]}>
-        <Typography variant="h6" component="div" className={styles.logo}>
-          Exclusive
-        </Typography>
-        <List className={styles.menu}>
-          <ListItem button className={styles["menu-item"]}>
-            <Typography variant="body1">Home</Typography>
-          </ListItem>
-          <ListItem button className={styles["menu-item"]}>
-            <Typography variant="body1">Contact</Typography>
-          </ListItem>
-          <ListItem button className={styles["menu-item"]}>
-            <Typography variant="body1">About</Typography>
-          </ListItem>
-          <ListItem button className={styles["menu-item"]}>
-            <Typography variant="body1">Sign Up</Typography>
-          </ListItem>
-        </List>
-      </Box>
-      <Box className={styles["search-and-icons"]}>
-        <TextField
-          variant="outlined"
-          placeholder="What are you looking for?"
-          className={styles["search-bar"]}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton>
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <IconButton className={styles["icon-button"]}>
-          <FavoriteBorderIcon />
-        </IconButton>
-        <IconButton className={styles["icon-button"]}>
-          <ShoppingCartOutlinedIcon />
-        </IconButton>
-      </Box>
-    </Box>
+    <div className={styles.header}>
+      {/* Logo and Menu Section */}
+      <div className={styles["logo-and-menu"]}>
+        <div className={styles.logo}>Exclusive</div>
+        <ul className={styles.menu}>
+          <li className={styles["menu-item"]}>
+            <Link to="/">Home</Link>
+          </li>
+          <li className={styles["menu-item"]}>
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li className={styles["menu-item"]}>
+            <Link to="/about">About</Link>
+          </li>
+          <li className={styles["menu-item"]}>
+            <Link to="/signup">Sign Up</Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* Search Bar and Icons */}
+      <div className={styles["search-and-icons"]}>
+        <div className={styles["search-bar"]}>
+          <input
+            type="text"
+            placeholder="What are you looking for?"
+            className={styles.input}
+          />
+          <button className={styles["search-button"]}>
+            <SearchIcon />
+          </button>
+        </div>
+        <div className={styles.actions}>
+          <button className={styles["action-button"]}>
+            <FavoriteBorderIcon />
+          </button>
+          <button className={styles["action-button"]}>
+            <ShoppingCartOutlinedIcon />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
