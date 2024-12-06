@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useCart } from "../../context/CartContext";
 import {
   Table,
@@ -7,34 +7,34 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TableSortLabel,
-  Paper,
   IconButton,
+  Paper,
 } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import "./Cart.scss";
 import { useNavigate } from "react-router-dom";
+import "./Cart.scss";
 
 const CartPage = () => {
-    const navigate=useNavigate()
-  const { updateQuantity,cart, removeFromCart } = useCart();
-  
+  const navigate = useNavigate();
+  const { updateQuantity, cart, removeFromCart } = useCart();
+
   // Update quantity handlers
   const handleIncreaseQuantity = (item) => {
-    updateQuantity(item.id,item.quantity+1); 
+    updateQuantity(item.productId, item.quantity + 1);
   };
 
   const handleDecreaseQuantity = (item) => {
-    updateQuantity(item.id,item.quantity-1);
+    updateQuantity(item.productId, item.quantity - 1);
   };
 
   const handleRemoveItem = (id) => {
-    removeFromCart(id); // Context handles removal
+    removeFromCart(id);
   };
 
+  // Corrected subtotal calculation
   const calculateSubtotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
   };
 
   return (
@@ -53,10 +53,14 @@ const CartPage = () => {
             </TableHead>
             <TableBody>
               {cart.map((item) => (
-                <TableRow key={item.id}>
+                <TableRow key={item.productId}>
                   <TableCell>
                     <div className="item-info">
-                      <img src={item.image} alt={item.title} className="item-image" />
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="item-image"
+                      />
                       <span className="item-name">{item.title}</span>
                     </div>
                   </TableCell>
@@ -82,7 +86,7 @@ const CartPage = () => {
                   <TableCell>
                     <IconButton
                       className="remove-btn"
-                      onClick={() => handleRemoveItem(item.id)}
+                      onClick={() => handleRemoveItem(item.productId)}
                     >
                       ✖
                     </IconButton>
@@ -112,7 +116,7 @@ const CartPage = () => {
           </div>
         </div>
         <button className="checkout-btn">Proceed to Checkout</button>
-              <button onClick={()=>navigate('/')} className="shop-btn">Return to Shop</button>
+        <button onClick={() => navigate('/')} className="shop-btn">Back to Shop</button>
       </div>
     </div>
   );

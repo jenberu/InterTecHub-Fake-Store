@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { fetchCart, fetchProduct } from "../api";
 
 const CartContext = createContext();
 
@@ -6,60 +7,128 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(() => {
-    // Initialize cart state from localStorage
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Save cart to localStorage whenever it changes
+  const userId = 1; // Example user ID, replace with actual logic to get the logged-in user
+
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    const fetchCartData = async () => {
+      try {
+        const response = await fetchCart(userId);
+        const cartData = response.data;
+
+        // Consolidate cart products by merging products with the same ID across all cart items
+        const consolidatedCart = cartData.reduce((acc, cartItem) => {
+          cartItem.products.forEach((product) => {
+            const existingProduct = acc.find(
+              (item) => item.productId === product.productId
+            );
+
+            if (existingProduct) {
+              // If product exists, update the quantity
+              existingProduct.quantity += product.quantity;
+            } else {
+              // If product doesn't exist, add it to the accumulator
+              acc.push({ ...product });
+            }
+          });
+          return acc;
+        }, []);
+
+        // Fetch product details (title, price, image) for each product in the cart
+        const updatedCart = await Promise.all(
+          consolidatedCart.map(async (product) => {
+            const productDetails = await fetchProduct(product.productId);
+            return {
+              ...product,
+              title: productDetails.data.title,
+              price: productDetails.data.price,
+              image: productDetails.data.image,
+            };
+          })
+        );
+
+        console.log('updatedCart', updatedCart);
+
+        setCart(updatedCart);
+        console.log('cart', cart);
+
+      } catch (err) {
+        setError("Failed to fetch cart data.");
+        console.error("Error fetching cart data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    console.log('cart', cart);
+
+
+    fetchCartData();
+  }, [userId]);
+  useEffect(() => {
+    console.log('Updated cart:', cart);
   }, [cart]);
 
-  // Add to Cart
   const addToCart = (product) => {
     setCart((prev) => {
-      const existingItem = prev.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prev.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prev, { ...product, quantity: 1 }];
+      const updatedCart = [...prev];
+      let productFound = false;
+
+      // Iterate over all cart items (now working with the consolidated cart)
+      updatedCart.forEach((productInCart) => {
+        if (productInCart.productId === product.productId) {
+          // If product exists, update the quantity
+          productInCart.quantity += 1;
+          productFound = true;
+        }
+      });
+
+      // If product was not found, add it to the cart
+      if (!productFound) {
+        updatedCart.push({
+          productId: product.productId,
+          quantity: 1,
+          title: product.title,
+          price: product.price,
+          image: product.image,
+        });
       }
+
+      return updatedCart;
     });
   };
 
-
-  // Remove product entirely from Cart
   const removeFromCart = (productId) => {
-    setCart((prev) => prev.filter((item) => item.id !== productId));
+    setCart((prev) =>
+      prev.filter((product) => product.productId !== productId)
+    );
   };
 
-  // Update product quantity in Cart
   const updateQuantity = (productId, quantity) => {
-    if (quantity < 1) return removeFromCart(productId); // Remove if quantity is less than 1
+    if (quantity < 1) return removeFromCart(productId);
+
     setCart((prev) =>
-      prev.map((item) =>
-        item.id === productId ? { ...item, quantity } : item
+      prev.map((product) =>
+        product.productId === productId
+          ? { ...product, quantity }
+          : product
       )
     );
   };
 
-  // Clear Cart
   const clearCart = () => setCart([]);
 
-  // Get Total Items in Cart
   const getTotalItems = () =>
-    cart.reduce((total, item) => total + item.quantity, 0);
+    cart.reduce((total, product) => total + product.quantity, 0);
 
   return (
     <CartContext.Provider
       value={{
         cart,
+        loading,
+        error,
         addToCart,
         removeFromCart,
         updateQuantity,
