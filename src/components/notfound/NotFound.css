@@ -14,7 +14,10 @@
     margin-bottom: 20px;
   }
   
-  .not-found-container a {
-    color: blue;
+  .not-found-container .link {
+    color: white !important;
+    padding: 1rem;
+    font-size: 20px;
+    background-color: #DB4444;
     text-decoration: underline;
   }
