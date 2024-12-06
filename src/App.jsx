@@ -12,6 +12,7 @@ import CartPage from './pages/cart/Cart';
 import CheckoutPage from './pages/checkout/Checkout';
 import WishlistPage from './pages/wishlist/WishList';
 import { WishlistProvider } from './context/WishlistContext';
+import NotFound from './components/notfound/NotFound';
 function App() {
   return (
     <Router>
@@ -27,6 +28,7 @@ function App() {
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/whishlist" element={<WishlistPage />} />
 
+        <Route path="*" element={<NotFound />} />
 
 
 

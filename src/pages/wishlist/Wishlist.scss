@@ -6,6 +6,23 @@ $text-color: #333;
 $discount-color: #ff3b3b;
 
 // Wishlist Styles
+
+.empty-wishlist-message{
+  padding: 3rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  .back-shop-btn{
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    padding: 1.5rem;
+    background-color: rgba(0, 0, 255,0.5);
+  }
+}
 .wishlist-page {
   align-items: center;
   justify-content: center;

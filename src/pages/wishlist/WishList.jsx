@@ -3,23 +3,44 @@ import './Wishlist.scss';
 import { useWishlist } from "../../context/WishlistContext";
 import DeleteIcon from '@mui/icons-material/Delete'; 
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 const Wishlist = () => {
     const { wishlist,removeFromWishlist } = useWishlist();
+    const { addToCart  } = useCart();
 
   const navigate = useNavigate();
   // Move all items to bag
   const moveAllToBag = () => {
     console.log("Move all items to the bag");
     // Handle logic to move all to the cart
-  };
+    };
+    const handleAddToCart = (product) => {
+        addToCart(product);
+        removeFromWishlist(product.id)
+
+        navigate(`/product/${product.id}`, { state: { product } });
+      };
 
   // Remove item from wishlist
     const remove = (productId) => {
         removeFromWishlist(productId)
        
   };
-
-  return (
+    if (wishlist.length === 0) {
+    return (
+      <div className="empty-wishlist-message">
+            Your wishlist is empty. Add items to your wishlist by clicking on the favoriteIcon button on the product details page.
+            <p>
+                <button onClick={() => navigate("/")} className="back-shop-btn">
+                  Back to Shop
+                </button>
+                
+            </p>
+      </div>
+    );
+}
+    return (
+      
     <div className="wishlist-page">
       <div className="wishlist-header">
         <h2>Wishlist ({wishlist.length})</h2>
@@ -53,7 +74,7 @@ const Wishlist = () => {
                   <div className="wishlist-item-price">${item.price}</div>
                 )}
               </div>
-              <button className="add-to-cart-button">Add To Cart</button>
+              <button onClick={()=>handleAddToCart(item)} className="add-to-cart-button">Add To Cart</button>
             </div>
           </div>
         ))}
