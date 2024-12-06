@@ -5,7 +5,7 @@ import "./Checkout.scss";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
-  const { cart, error, message } = useCart();
+  const { cart} = useCart();
 
   // Form state for shipping details
   const [shippingDetails, setShippingDetails] = useState({

@@ -10,6 +10,7 @@ import SignUp from './pages/signup/SignUp';
 import Login from './pages/login/Login';
 import CartPage from './pages/cart/Cart';
 import CheckoutPage from './pages/checkout/Checkout';
+import WishlistPage from './pages/wishlist/WishList';
 function App() {
   return (
       <Router>
@@ -21,6 +22,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/whishlist" element={<WishlistPage />} />
+
 
 
 
