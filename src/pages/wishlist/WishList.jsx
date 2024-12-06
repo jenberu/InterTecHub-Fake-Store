@@ -1,46 +1,59 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import './Wishlist.scss';
 import { useWishlist } from "../../context/WishlistContext";
-import "./Wishlist.scss";
+import DeleteIcon from '@mui/icons-material/Delete'; 
+import { useNavigate } from "react-router-dom";
+const Wishlist = () => {
+    const { wishlist,removeFromWishlist } = useWishlist();
 
-const WishlistPage = () => {
-  const { wishlist, removeFromWishlist } = useWishlist();
   const navigate = useNavigate();
+  // Move all items to bag
+  const moveAllToBag = () => {
+    console.log("Move all items to the bag");
+    // Handle logic to move all to the cart
+  };
 
-  // Redirect to the shop if the wishlist is empty
-  if (wishlist.length === 0) {
-    return (
-      <div className="wishlist-empty">
-        Your wishlist is empty.{" "}
-        <button onClick={() => navigate("/shop")} className="shop-btn">
-          Back to Shop
-        </button>
-      </div>
-    );
-  }
+  // Remove item from wishlist
+    const remove = (productId) => {
+        removeFromWishlist(productId)
+       
+  };
 
   return (
-    <div className="wishlist-container">
-      <h2>Your Wishlist</h2>
+    <div className="wishlist-page">
+      <div className="wishlist-header">
+        <h2>Wishlist ({wishlist.length})</h2>
+        <button onClick={moveAllToBag} className="move-all-to-bag-button">
+          Move All To Bag
+        </button>
+      </div>
       <div className="wishlist-items">
         {wishlist.map((item) => (
-          <div key={item.productId} className="wishlist-item">
-            <img src={item.image} alt={item.title} className="item-image" />
-            <div className="item-details">
+          <div className="wishlist-item" key={item.id}>
+            <div className="wishlist-item-image">
+              <img src={item.image} alt={item.title} />
+              
+            </div>
+            <button title="remove "
+                onClick={() => remove(item.id)}
+                className="remove-from-wishlist-button"
+              >
+                        <DeleteIcon />
+                    </button>
+            <div className="wishlist-item-details">
               <h3>{item.title}</h3>
-              <p>${item.price}</p>
-              <button
-                onClick={() => removeFromWishlist(item.productId)}
-                className="remove-btn"
-              >
-                Remove
-              </button>
-              <button
-                onClick={() => navigate(`/product/${item.productId}`)}
-                className="view-btn"
-              >
-                View Details
-              </button>
+              <div className="wishlist-item-pricing">
+                {item.discountPrice ? (
+                  <div className="wishlist-item-discount">
+                    <span className="original-price">${item.discountPrice}</span>
+                    <span className="discounted-price">${item.price}</span>
+                    <span className="discount-percent">-{item.discount}%</span>
+                  </div>
+                ) : (
+                  <div className="wishlist-item-price">${item.price}</div>
+                )}
+              </div>
+              <button className="add-to-cart-button">Add To Cart</button>
             </div>
           </div>
         ))}
@@ -49,4 +62,4 @@ const WishlistPage = () => {
   );
 };
 
-export default WishlistPage;
+export default Wishlist;

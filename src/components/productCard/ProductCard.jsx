@@ -5,8 +5,10 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarIcon from "@mui/icons-material/Star";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistContext";
 const ProductCard = ({ product }) => {
   const { addToCart  } = useCart();
+  const { addToWishlist } = useWishlist();
 
   const navigate = useNavigate();
 
@@ -14,11 +16,13 @@ const ProductCard = ({ product }) => {
     addToCart(product);
     navigate(`/product/${product.id}`, { state: { product } });
   };
-
+  const handleAddToWhishlist = () => {
+    addToWishlist(product);
+  };
   return (
     <div className={styles.card}>
-      <div className={styles.iconContainer}>
-        <FavoriteBorderIcon className={styles.favoriteIcon} />
+      <div onClick={handleAddToWhishlist} className={styles.iconContainer}>
+        <FavoriteBorderIcon  className={styles.favoriteIcon} />
         <VisibilityIcon className={styles.visibilityIcon} />
       </div>
       <div className={styles.imageContainer}>

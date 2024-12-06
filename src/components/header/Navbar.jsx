@@ -7,8 +7,9 @@ import styles from "./Header.module.scss";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccountDropdown from "../accounts/ManageAccounts";
 import { useCart } from "../../context/CartContext";
-
+import { useWishlist } from "../../context/WishlistContext";
 const Header = () => {
+  const { wishlist } = useWishlist();
   const { getTotalItems } = useCart();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
    const navigate=useNavigate()
@@ -51,9 +52,13 @@ const Header = () => {
             <SearchIcon />
           </button>
         </div>
-        <div className={styles.actions}>
-          <button className={styles["action-button"]}>
+        <div className={styles.actions} >
+          <button className={styles["action-button"]} onClick={()=>navigate('/whishlist')}>
             <FavoriteBorderIcon />
+            {
+              wishlist?.length>0&&<span className={styles["whish-badge"]}>{ wishlist?.length}</span>
+
+            }
           </button>
 
           {/* Shopping Cart Icon */}

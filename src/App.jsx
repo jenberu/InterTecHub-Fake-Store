@@ -11,9 +11,12 @@ import Login from './pages/login/Login';
 import CartPage from './pages/cart/Cart';
 import CheckoutPage from './pages/checkout/Checkout';
 import WishlistPage from './pages/wishlist/WishList';
+import { WishlistProvider } from './context/WishlistContext';
 function App() {
   return (
-      <Router>
+    <Router>
+      <WishlistProvider>
+
           <Header />
         <Routes>
             <Route path="/" element={<Home />} />
@@ -29,7 +32,9 @@ function App() {
 
       
           </Routes>
-          <Footer />
+        <Footer />
+        </WishlistProvider>
+
     </Router>
 );
 }

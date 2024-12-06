@@ -75,7 +75,7 @@
     .actions {
       display: flex;
       gap: 10px;
-      .cart-badge {
+      .cart-badge , .whish-badge{
         position: absolute;
         top: -5px;
         right: -10px;
