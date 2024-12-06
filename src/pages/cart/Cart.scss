@@ -38,7 +38,10 @@
   margin: 0 5px;
   
 }
+.increase {
+  background: #00ff9d;
 
+}
 .remove-btn {
   color: red;
 }
@@ -75,4 +78,17 @@
 .checkout-btn:hover,
 .shop-btn:hover {
   background-color: #0056b3;
+}
+.empty-cart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  gap:30px;
+  button{
+    width: 50%;
+    padding: 1.5rem;
+
+  }
 }

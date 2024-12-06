@@ -36,7 +36,11 @@ const CartPage = () => {
   const calculateSubtotal = () => {
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2);
   };
-
+  if (cart.length === 0) {
+    return <div className="empty-cart">Your cart is empty!
+   <button onClick={() => navigate('/')} className="shop-btn">Back to Shop</button>
+</div>
+}
   return (
     <div className="cart-container">
       <div className="cart-main">

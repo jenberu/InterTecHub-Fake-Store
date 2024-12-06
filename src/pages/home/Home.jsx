@@ -82,6 +82,10 @@ const Home = () => {
     ? filteredProducts
     : filteredProducts.slice(0, defaultProductLimit);
 
+//   if (products.length === 0) {
+//   return <h1>Loading...</h1>;
+// }
+  
   return (
     <div className="home-container">
       <div className="home-top">
