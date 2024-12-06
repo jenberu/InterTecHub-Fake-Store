@@ -124,7 +124,7 @@ const CartPage = () => {
             <span>${calculateSubtotal()}</span>
           </div>
         </div>
-        <button className="checkout-btn">Proceed to Checkout</button>
+        <button onClick={() => navigate('/checkout')} className="checkout-btn">Proceed to Checkout</button>
         <button onClick={() => navigate('/')} className="shop-btn">Back to Shop</button>
       </div>
     </div>
