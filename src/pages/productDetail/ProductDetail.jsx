@@ -4,7 +4,7 @@ import styles from "./ProductDetails.module.scss";
 import { useCart } from "../../context/CartContext";
 
 const ProductDetails = () => {
-  const { removeFromCart } = useCart();
+  const { removeFromCart,updateQuantity } = useCart();
   const { state } = useLocation();
   const product = state?.product;
   const navigate = useNavigate();
@@ -33,8 +33,18 @@ const ProductDetails = () => {
     navigate("/");
   };
 
-  const incrementQuantity = () => setQuantity((prev) => prev + 1);
-  const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+    const incrementQuantity = () => {
+        updateQuantity(product.id,quantity+1)
+
+        setQuantity((prev) => prev + 1);
+  } 
+    const decrementQuantity = () => {
+        updateQuantity(product.id,quantity-1)
+
+        setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+        
+     }
 
   return (
     <div className={styles.productDetails}>

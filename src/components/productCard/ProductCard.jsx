@@ -6,7 +6,7 @@ import StarIcon from "@mui/icons-material/Star";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useCart } from "../../context/CartContext";
 const ProductCard = ({ product }) => {
-  const { addToCart } = useCart();
+  const { addToCart  } = useCart();
 
   const navigate = useNavigate();
 

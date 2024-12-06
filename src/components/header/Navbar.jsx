@@ -57,7 +57,7 @@ const Header = () => {
           </button>
 
           {/* Shopping Cart Icon */}
-          <button className={styles["action-button"]} onClick={()=>navigate('/cart')}>
+          <button title="your cart" className={styles["action-button"]} onClick={()=>navigate('/cart')}>
             <ShoppingCartOutlinedIcon />
             {getTotalItems() > 0 && (
               <span className={styles["cart-badge"]}>{getTotalItems()}</span>

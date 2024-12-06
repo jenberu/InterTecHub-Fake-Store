@@ -210,11 +210,20 @@ import './footer.scss'
             padding: "20px 0",
           }}
         >
+ 
+           
           <Copyright sx={{ width: 20, height: 20, marginRight: 1.5 }} />
           <Typography variant="body2" component="div">
-            Copyright Rimel 2022. All right reserved
+         
+            Copyright  2024. All right reserved
           </Typography>
         </Box>
+        <p>
+          designed by <a href="http://"> InterTecHub Team</a>
+            </p>
+          <p>
+          Developed By jemberu Kassie
+            </p>
       </Box>
     );
   };
