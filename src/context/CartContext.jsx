@@ -19,6 +19,9 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchCartData = async () => {
+      // clear  previous error and message
+      setError(null);
+      setMessage(null)
       try {
         const response = await fetchCart(userId);
         const cartData = response.data;
@@ -67,6 +70,8 @@ export const CartProvider = ({ children }) => {
   }, [userId]);
  
   const addToCart = async (product) => {
+    setError(null);
+    setMessage(null);
     try {
       let productFound = false;
   
@@ -94,6 +99,14 @@ export const CartProvider = ({ children }) => {
       if (!productFound) {
         try {
           const response = await addToCartApi(userId, product.id);
+          const newProduct = {
+            productId: product.id,
+            quantity: 1,
+            title: product.title,
+            price: product.price,
+            image: product.image,
+          };
+          setCart((prevCart) => [...prevCart, newProduct]);
           setMessage('Product added to cart successfully:', response.data);
           console.log('Product added to cart successfully:', response.data);
         } catch (error) {
@@ -109,15 +122,26 @@ export const CartProvider = ({ children }) => {
   };
   
 
-  const removeFromCart = (productId) => {
-    RemoveProductFromCart(productId);
-  
-    setCart((prev) =>
-      prev.filter((product) => product.productId !== productId)
-    );
+  const removeFromCart = async (productId) => {
+    setError(null);
+    setMessage(null)
+    try {
+      const response = await RemoveProductFromCart(productId);
+      setCart((prev) =>
+        prev.filter((product) => product.productId !== productId)
+      );
+      console.log('Product removed from cart successfully:', response.data);
+      setMessage('Product removed from cart successfully:', response.data);
+    } catch (error) {
+      setError('Error deleting product in cart:', error);
+      console.error('Error deleting product in cart :', error);
+  }
+    
   };
 
   const updateQuantity = (productId, quantity) => {
+    setError(null);
+    setMessage(null);
     if (quantity < 1) return removeFromCart(productId);
 
     setCart((prev) =>
@@ -140,6 +164,7 @@ export const CartProvider = ({ children }) => {
         cart,
         loading,
         error,
+        message,
         addToCart,
         removeFromCart,
         updateQuantity,

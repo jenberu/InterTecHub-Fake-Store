@@ -17,7 +17,7 @@ import "./Cart.scss";
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { updateQuantity, cart, removeFromCart } = useCart();
+  const { updateQuantity, cart, removeFromCart,error,message } = useCart();
 
   // Update quantity handlers
   const handleIncreaseQuantity = (item) => {
@@ -43,6 +43,9 @@ const CartPage = () => {
 }
   return (
     <div className="cart-container">
+      <h2 style={{ color: message ? 'green' : error ? 'red' : 'inherit' }}>
+        {message || error || ""}
+      </h2>
       <div className="cart-main">
         <TableContainer component={Paper}>
           <Table>
@@ -89,6 +92,8 @@ const CartPage = () => {
                   <TableCell>${(item.price * item.quantity).toFixed(2)}</TableCell>
                   <TableCell>
                     <IconButton
+                      style={{color:"red"}}
+                      title="remove from cart"
                       className="remove-btn"
                       onClick={() => handleRemoveItem(item.productId)}
                     >

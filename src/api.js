@@ -15,32 +15,20 @@ export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const createOrder = (data) => API.post('/carts', data);
 
 
-export const addToCartApi =  (userId, productId) => 
-       API.post('/carts', {
+export const addToCartApi =  (userId, productId) => API.post('/carts', {
         userId: userId,
         date: today,
         products: [{ productId: productId, quantity: 1 }],
       });
 
   
-export const updateCart = async (userId,productId,quantity) => {
-    try {
-      const response = await API.put(`/carts/${productId}`, {
+export const updateCart =  (userId,productId,quantity) =>  API.put(`/carts/${productId}`, {
         userId: userId,
         date: today,
         products: [{ productId:productId , quantity: quantity}],
       });
-      console.log('Cart updated successfully:', response.data);
-    } catch (error) {
-      console.error('Error updating cart:', error);
-    }
-};
-export const RemoveProductFromCart = async (id) => {
-    try {
-        const response = await API.delete(`/carts/${id}`);
-        console.log('Product removed from cart successfully:', response.data);
-    } catch (error) {
-        console.error('Error deleting product in cart :', error);
-    }
+     
+export const RemoveProductFromCart =  (id) => API.delete(`/carts/${id}`);
+  
     
-};
+
