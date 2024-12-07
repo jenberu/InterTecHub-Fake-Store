@@ -52,9 +52,7 @@ $discount-color: #ff3b3b;
       cursor: pointer;
       transition: background-color 0.3s ease;
 
-      &:hover {
-        background-color: darken($primary-color, 10%);
-      }
+    
     }
   }
 
@@ -166,9 +164,7 @@ $discount-color: #ff3b3b;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
-        &:hover {
-          background-color: darken($primary-color, 10%);
-        }
+      
       }
     }
   }
