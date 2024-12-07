@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import "./Checkout.scss";
+import { createOrder } from "../../api";
 
 const CheckoutPage = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const CheckoutPage = () => {
   };
 
   // Handle checkout form submission
-  const handleCheckout = (e) => {
+  const handleCheckout = async (e) => {
     e.preventDefault();
 
     // Ensure all fields are filled out
@@ -48,16 +49,26 @@ const CheckoutPage = () => {
     }
 
     setIsSubmitting(true);
-
-    // Here you can make an API call to process the order, e.g., submit order details to your server
-    setTimeout(() => {
-      // Simulating a successful checkout submission
+    const orderData = {
+      userId: 1, 
+      products: cart.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      })),
+      shippingDetails,
+    };
+    try {
+   
+      const response = await createOrder(orderData);
+      console.log("Order placed successfully:", response.data);
+      alert("Order placed successfully:");
+    } catch (error) {
+      console.error("Error placing order:", error);
       setIsSubmitting(false);
-      alert("Your order has been placed successfully!");
-
-      // After successful checkout, clear the cart and navigate to the confirmation page
-      navigate("/order-confirmation");
-    }, 2000); // Simulated API call delay
+      alert("An error occurred while placing your order. Please try again later.");
+    }
+      navigate("/");
+  
   };
 
   // Corrected subtotal calculation for the cart total
@@ -176,7 +187,7 @@ const CheckoutPage = () => {
             </thead>
             <tbody>
               {cart.map((item) => (
-                <tr key={item.productId}>
+                <tr key={item.id}>
                       <td> <img
                         src={item.image}
                         alt={item.title}

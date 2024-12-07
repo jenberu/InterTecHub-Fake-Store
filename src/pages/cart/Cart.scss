@@ -69,16 +69,13 @@
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background-color: #007bff;
+  background-color: #DB4444;
   color: white;
   border: none;
   cursor: pointer;
 }
 
-.checkout-btn:hover,
-.shop-btn:hover {
-  background-color: #0056b3;
-}
+
 .empty-cart{
   display: flex;
   flex-direction: column;
