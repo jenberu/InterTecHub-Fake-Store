@@ -1,22 +1,31 @@
 import React, { useState } from "react";
-// import "./EditProfile.scss"; 
+import "./EditProfile.scss"; 
 import { useUser } from "../../context/UserContext";
 import { updateUser } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 
 const EditProfile = () => {
-  const { user } = useUser();
+    const { user } = useUser();
+    const [message, setMessage] = useState(null);
+    const [error, setError] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const navigate = useNavigate();
+
   const [profile, setProfile] = useState({
     firstName: user?.name.firstname,
     lastName:  user?.name.lastname,
-    email: user.email,
-    address: user.address.city,
+    email: user?.email,
+    address: user?.address.city,
     currentPassword: "",
     newPassword: "",
     confirmNewPassword: "",
   });
 
-  const handleChange = (e) => {
+    const handleChange = (e) => {
+        setIsSubmitting(false)
+        setError(null);
+        setMessage(null);
     const { name, value } = e.target;
     setProfile((prevProfile) => ({
       ...prevProfile,
@@ -24,33 +33,47 @@ const EditProfile = () => {
     }));
   };
 
-  const handleSaveChanges =  async () => {
+    const handleSaveChanges = async () => {
+        setError(null);
+        setMessage(null);
     if (profile.newPassword !== profile.confirmNewPassword) {
-      alert("New passwords do not match!");
+        setMessage("New passwords do not match!");
       return;
       }
 
       try {
-          
+          setIsSubmitting(true);
+ 
           const response = await updateUser(user?.id, profile);
-          alert("Profile updated successfully!");
+          setMessage("Profile updated successfully!");
 
       } catch (error) {
-          alert("unexpected error while updating profile!",error);
+          setIsSubmitting(false);
 
-      }
+        setError("unexpected error while updating profile!",error);
+
+        }
+        setIsSubmitting(false);
+
   };
 
   const handleCancel = () => {
-    // Reset or navigate away
-    alert("Changes canceled!");
+    
+      setMessage("Changes canceled!");
+      setTimeout(() => {
+        navigate("/");
+
+       },1000)
   };
 
   return (
     <div className="edit-profile">
       <h2 className="header">Edit Your Profile</h2>
-
+      <h2 style={{ color: message ? 'green' : error ? 'red' : 'inherit' }}>
+        {message || error || ""}
+      </h2>
       <div className="profile-fields">
+     
         <div className="field">
           <label className="label">First Name</label>
           <input
@@ -137,12 +160,17 @@ const EditProfile = () => {
         <button onClick={handleCancel} className="cancel-btn">
           Cancel
         </button>
-        <button onClick={handleSaveChanges} className="save-btn">
-          Save Changes
+              <button onClick={handleSaveChanges}
+                  disabled={isSubmitting}
+
+                  className="save-btn">
+        {isSubmitting ? "Processing..." : "Save Changes"}
         </button>
       </div>
     </div>
   );
 };
+
+
 
 export default EditProfile;

@@ -1,0 +1,69 @@
+.edit-profile {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+  
+    .header {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  
+    .profile-fields {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 10px; 
+    }
+    .profile-fields,
+    .password-section {
+      margin-bottom: 20px;
+  
+      .field {
+        margin-bottom: 15px;
+  
+        .label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+  
+        .input {
+          width: 80%;
+          padding: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+      }
+    }
+  
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap:20px;
+  
+      .cancel-btn {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+  
+      .save-btn {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        &:disabled {
+          background-color: #6c757d;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  
