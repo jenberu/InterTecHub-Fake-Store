@@ -11,6 +11,7 @@ export const fetchCategories = () => API.get('/products/categories');
 export const fetchCart = (userId) => API.get(`/carts/user/${userId}`);
 export const deleteCart = (id) => API.delete(`/carts/${id}`);
 export const getUser = (id) => API.get(`/users/${id}`);
+export const createUser = (data) => API.post('/users', data);
 export const updateUser = (id, data) => API.put(`/users/${id}`, data);
 export const createOrder = (data) => API.post('/carts', data);
 
