@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { fetchUser } from "../api";
+import { getUser } from "../api";
 
 const UserContext = createContext();
 
@@ -17,19 +17,23 @@ export const UserProvider = ({ children }) => {
     const fetchUser = async () => {
       try {
         setLoading(true);
-        const response = await fetchUser(1);
-        setUser(response.data);
+        const response = await getUser(1);
+          setUser(response.data);
+
+
       } catch (err) {
         console.error("Error fetching user:", err);
         setError(err.message);
       } finally {
+
         setLoading(false);
       }
     };
 
-    fetchUser();
-  }, []);
+      fetchUser();
 
+  }, []);
+  
   return (
     <UserContext.Provider value={{ user, loading, error }}>
       {children}

@@ -13,6 +13,7 @@ import CheckoutPage from './pages/checkout/Checkout';
 import WishlistPage from './pages/wishlist/WishList';
 import { WishlistProvider } from './context/WishlistContext';
 import NotFound from './components/notfound/NotFound';
+import EditProfile from './pages/accounts/MyAccount';
 function App() {
   return (
     <Router>
@@ -27,7 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/whishlist" element={<WishlistPage />} />
-
+        <Route path="/myaccount" element={<EditProfile />} />
         <Route path="*" element={<NotFound />} />
 
 

@@ -8,7 +8,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccountDropdown from "../accounts/ManageAccounts";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
+import { useUser } from "../../context/UserContext";
 const Header = () => {
+  const { user } = useUser();
   const { wishlist } = useWishlist();
   const { getTotalItems } = useCart();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -70,7 +72,7 @@ const Header = () => {
           </button>
 
           {/* User Profile Icon */}
-          <button
+          <button title={user?.username}
             className={styles["action-button"]}
             onClick={toggleDropdown} // Toggle dropdown on click
           >
