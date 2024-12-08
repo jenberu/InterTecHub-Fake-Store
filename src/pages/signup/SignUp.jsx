@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 import logo from "../../assets/images/logo2.png";
 import { Link } from "react-router-dom";
-import "./SignUp.css";
+import "./SignUp.scss";
 import { createUser } from "../../api";
 import { useNavigate } from "react-router-dom";
 
