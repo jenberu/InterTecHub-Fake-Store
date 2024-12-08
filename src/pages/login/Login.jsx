@@ -46,7 +46,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-left">
         <div className="login-image-wrapper">
-          <img src={logo} alt="Dl beatsnoop" className="login-logo" />
+          <img src={logo} alt="Dl beatsnoop" className="login-logo"  style={{ width: '800px', height: '600px' }}  />
         </div>
       </div>
 
