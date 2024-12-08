@@ -65,7 +65,7 @@ const SignUp = () => {
           src={logo} 
           alt="Dl beatsnoop" 
           className="signup-logo" 
-          style={{ width: '800px', height: '600px' }} 
+          style={{ width: '600px', height: '600px' }} 
 />        </div>
       </div>
 
