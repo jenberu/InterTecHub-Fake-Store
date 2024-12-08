@@ -61,8 +61,12 @@ const SignUp = () => {
     <div className="signup-container">
       <div className="signup-left">
         <div className="signup-image-wrapper">
-          <img src={logo} alt="Dl beatsnoop" className="signup-logo" />
-        </div>
+        <img 
+          src={logo} 
+          alt="Dl beatsnoop" 
+          className="signup-logo" 
+          style={{ width: '800px', height: '600px' }} 
+/>        </div>
       </div>
 
       <div className="signup-right">
