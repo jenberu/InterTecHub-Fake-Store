@@ -6,7 +6,7 @@
     height: auto;
 
   .signup-left {
-    flex: 7;
+    flex: 1;
     background-color: #cbe4e8;
     display: flex;
     justify-content: center;
@@ -19,16 +19,14 @@
       position: relative;
 
       .signup-logo {
-        
-        position: absolute;
-        top: 75px;
-        left: 0;
+        margin:50px auto;
+       
       }
     }
   }
 
   .signup-right {
-    flex: 5;
+    flex: 1;
     padding: 40px;
     display: flex;
     flex-direction: column;
