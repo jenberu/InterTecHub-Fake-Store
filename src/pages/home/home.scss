@@ -1,5 +1,4 @@
 .home-container {
- margin-top: 100px;
   padding: 1rem;
   
 
@@ -9,6 +8,7 @@
   }
 
   .products-grid {
+
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 1rem;
@@ -29,12 +29,16 @@
     }
   }
   .main-content {
-    margin-top: 50px;
+
+    margin-top: 20px;
    .categories-container{
+
     h1{
       text-align: left;
+      
     }
     .categories {
+
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
@@ -64,12 +68,18 @@
   }
   
   .home-top{
+
     display: flex;
     gap: 1.5rem;
-    height: 400px;
     .heading-image{
       flex: 1;
       height: inherit;
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+      }
     }
   }
   .category {
@@ -145,4 +155,9 @@
     
   }
   
+}
+@media (max-width: 768px) {
+  .category {
+   display: none;
+  }
 }

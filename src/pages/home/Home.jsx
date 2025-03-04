@@ -6,9 +6,9 @@ import { fetchProducts, fetchCategories } from "../../api";
 import "./home.scss";
 import headingImage from "../../assets/images/headingImage.png";
 import DevicesOtherIcon from "@mui/icons-material/DevicesOther";
-import DiamondIcon from "@mui/icons-material/Diamond"; 
-import ManIcon from "@mui/icons-material/Man"; 
-import WomanIcon from "@mui/icons-material/Woman"; 
+import DiamondIcon from "@mui/icons-material/Diamond";
+import ManIcon from "@mui/icons-material/Man";
+import WomanIcon from "@mui/icons-material/Woman";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -80,10 +80,10 @@ const Home = () => {
     ? filteredProducts
     : filteredProducts.slice(0, defaultProductLimit);
 
-//   if (products.length === 0) {
-//   return <h1>Loading...</h1>;
-// }
-  
+  //   if (products.length === 0) {
+  //   return <h1>Loading...</h1>;
+  // }
+
   return (
     <div className="home-container">
       <div className="home-top">
@@ -94,7 +94,9 @@ const Home = () => {
             onCategoryChange={setSelectedCategory}
           />
         </div>
-        <img className="heading-image" src={headingImage} alt="heading image" />
+        <div className="heading-image">
+          <img src={headingImage} alt="heading image" />
+        </div>
       </div>
       <div className="title-container">
         {/* <h1 className="day">Today's</h1> */}
@@ -117,13 +119,19 @@ const Home = () => {
                   selectedCategory === category ? "active" : ""
                 }`}
               >
-             
-      {category === "electronics" && <DevicesOtherIcon style={{ fontSize: 50 }} />}
-      {category === "jewelery" && <DiamondIcon style={{ fontSize: 50 }} />}
-      {category === "men's clothing" && <ManIcon style={{ fontSize: 50 }} />}
-      {category === "women's clothing" && <WomanIcon style={{ fontSize: 50 }} />}
-      {category}
-           
+                {category === "electronics" && (
+                  <DevicesOtherIcon style={{ fontSize: 50 }} />
+                )}
+                {category === "jewelery" && (
+                  <DiamondIcon style={{ fontSize: 50 }} />
+                )}
+                {category === "men's clothing" && (
+                  <ManIcon style={{ fontSize: 50 }} />
+                )}
+                {category === "women's clothing" && (
+                  <WomanIcon style={{ fontSize: 50 }} />
+                )}
+                {category}
               </span>
             ))}
           </div>

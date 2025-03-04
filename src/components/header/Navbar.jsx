@@ -1,43 +1,46 @@
 import React, { useState } from "react";
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import styles from "./Header.module.scss";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import AccountDropdown from "../accounts/ManageAccounts";
 import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
 import { useUser } from "../../context/UserContext";
+import styles from "./Header.module.scss";
+
 const Header = () => {
   const { user } = useUser();
   const { wishlist } = useWishlist();
   const { getTotalItems } = useCart();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
-   const navigate=useNavigate()
-  // Toggle the dropdown visibility
-  const toggleDropdown = () => {
-    setDropdownVisible((prev) => !prev);
-  };
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
+  const toggleDropdown = () => setDropdownVisible((prev) => !prev);
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
     <div className={styles.header}>
       {/* Logo and Menu Section */}
       <div className={styles["logo-and-menu"]}>
         <div className={styles.logo}>Exclusive</div>
-        <ul className={styles.menu}>
+        <button className={styles["menu-toggle"]} onClick={toggleMenu}>
+          {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+        </button>
+        <ul className={`${styles.menu} ${isMenuOpen ? styles.open : ""}`}>
           <li className={styles["menu-item"]}>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={toggleMenu}>
+              Home
+            </Link>
           </li>
           <li className={styles["menu-item"]}>
-            <Link to="/contact">Contact</Link>
-          </li>
-          <li className={styles["menu-item"]}>
-            <Link to="/about">About</Link>
-          </li>
-          <li className={styles["menu-item"]}>
-            <Link to="/signup">Sign Up</Link>
+            <Link to="/signup" onClick={toggleMenu}>
+              Sign Up
+            </Link>
           </li>
         </ul>
       </div>
@@ -45,45 +48,40 @@ const Header = () => {
       {/* Search Bar and Icons */}
       <div className={styles["search-and-icons"]}>
         <div className={styles["search-bar"]}>
-          <input
-            type="text"
-            placeholder="What are you looking for?"
-            className={styles.input}
-          />
-          <button className={styles["search-button"]}>
+          <input type="text" placeholder="Search..." />
+          <button>
             <SearchIcon />
           </button>
         </div>
-        <div className={styles.actions} >
-          <button className={styles["action-button"]} onClick={()=>navigate('/whishlist')}>
+        <div className={styles.actions}>
+          <button
+            className={styles["action-button"]}
+            onClick={() => navigate("/whishlist")}
+          >
             <FavoriteBorderIcon />
-            {
-              wishlist?.length>0&&<span className={styles["whish-badge"]}>{ wishlist?.length}</span>
-
-            }
+            {wishlist?.length > 0 && (
+              <span className={styles["whish-badge"]}>{wishlist?.length}</span>
+            )}
           </button>
-
-          {/* Shopping Cart Icon */}
-          <button title="your cart" className={styles["action-button"]} onClick={()=>navigate('/cart')}>
+          <button
+            className={styles["action-button"]}
+            onClick={() => navigate("/cart")}
+          >
             <ShoppingCartOutlinedIcon />
             {getTotalItems() > 0 && (
               <span className={styles["cart-badge"]}>{getTotalItems()}</span>
             )}
           </button>
-
-          {/* User Profile Icon */}
-          <button title={user?.username}
+          <button
+            title={user?.username}
             className={styles["action-button"]}
-            onClick={toggleDropdown} // Toggle dropdown on click
+            onClick={toggleDropdown}
           >
             <AccountCircleIcon />
           </button>
-
-          {/* Dropdown Menu */}
           {isDropdownVisible && <AccountDropdown toggle={toggleDropdown} />}
         </div>
       </div>
-
     </div>
   );
 };

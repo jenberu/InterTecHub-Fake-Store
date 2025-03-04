@@ -2,15 +2,27 @@
   display: flex;
   gap: 20px;
   padding: 20px;
+  
+  @media (max-width: 768px) {
+    flex-direction: column; // Stack items vertically on smaller screens
+    gap: 15px;
+    padding: 10px;
+  }
 
   .imageContainer {
     flex: 1;
-    justify-content: right;
+    display: flex;
+    justify-content: center;
+
     img {
       max-width: 100%;
       border-radius: 8px;
       height: 400px;
-
+      
+      @media (max-width: 768px) {
+        height: auto; // Adjust height for smaller screens
+        max-width: 90%;
+      }
     }
   }
 
@@ -23,23 +35,37 @@
     .title {
       font-size: 24px;
       font-weight: bold;
+
+      @media (max-width: 768px) {
+        font-size: 20px;
+        text-align: center;
+      }
     }
 
     .price {
       font-size: 20px;
       color: #007bff;
 
+      @media (max-width: 768px) {
+        font-size: 18px;
+        text-align: center;
+      }
     }
 
     .description {
       font-size: 16px;
       color: #555;
 
+      @media (max-width: 768px) {
+        font-size: 14px;
+        text-align: justify;
+      }
     }
 
     .rating {
       display: flex;
       gap: 5px;
+      justify-content: center;
 
       .star {
         color: gold;
@@ -53,6 +79,10 @@
       align-items: center;
       gap: 10px;
 
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
       .label {
         font-weight: bold;
       }
@@ -65,7 +95,7 @@
           width: 24px;
           height: 24px;
           border-radius: 50%;
-          border: 2px solid ;
+          border: 2px solid;
           cursor: pointer;
 
           &.selected {
@@ -102,6 +132,10 @@
       align-items: center;
       gap: 10px;
 
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
       .label {
         font-weight: bold;
       }
@@ -112,15 +146,17 @@
         gap: 15px;
 
         .quantityButton {
-          padding: 10px 1rem ;
-          font-size: 20px;
-          color: #ccc;
-          border: 1px solid #ccc;
+          padding: 8px 1rem;
+          font-size: 18px;
+          color: #fff;
+          border: none;
           border-radius: 4px;
           background-color: #db3012a8;
           cursor: pointer;
 
-        
+          &:hover {
+            background-color: #c1270d;
+          }
         }
 
         .quantityValue {
@@ -133,6 +169,12 @@
     .actions {
       display: flex;
       gap: 10px;
+      justify-content: center;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+      }
 
       .buyNowButton,
       .removeFromCartButton {
@@ -141,6 +183,10 @@
         border-radius: 4px;
         cursor: pointer;
         font-size: 16px;
+
+        @media (max-width: 768px) {
+          width: 80%; // Make buttons wider on small screens
+        }
       }
 
       .buyNowButton {
